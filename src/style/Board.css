@@ -1,0 +1,29 @@
+.main-board {
+  background-color: #f3f3f3;
+  min-height: 100vh;
+}
+
+.col-container {
+  display: flex;
+  padding: 1rem;
+}
+
+.board-col {
+  background-color: #ffffff;
+  -webkit-box-shadow: 1px 1px 1px 1px #ccc;
+  -moz-box-shadow:    1px 1px 1px 1px #ccc;
+  box-shadow:         1px 1px 1px 1px #ccc;
+  margin-left: 1rem;
+  padding: 2rem;
+  width: 100%;
+}
+
+.col-header {
+  text-align: center;
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+
+.board-col:first-of-type {
+  margin-left: 0 !important;
+}
