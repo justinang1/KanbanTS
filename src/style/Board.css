@@ -17,6 +17,7 @@
   -webkit-box-shadow: 5px 5px 10px #ccc;
   -moz-box-shadow:    5px 5px 10px #ccc;
   box-shadow: 5px 5px 10px #ccc;
+  color: white;
   text-align: center;
   font-size: 1.4rem;
   font-weight: 500;
@@ -48,5 +49,30 @@
   padding: 1rem;
   font-weight: 500;
   background-color: #FFFFFF;
-  height: 100px;
+  min-height: 60px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 4px;
+}
+
+.left-angle {
+  font-size: 2rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.right-angle {
+  font-size: 2rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.create-text {
+  cursor: pointer;
+}
+
+.task-text {
+  cursor: default;
 }
