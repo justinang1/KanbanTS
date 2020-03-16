@@ -1,20 +1,19 @@
-import { UPDATE_SESSION, SystemState, SystemActionTypes } from "./types";
+import { PUSH_MESSAGE, SystemState, SystemMessageType } from "./types";
 
 const initialState: SystemState = {
-  loggedIn: false,
-  session: "testttt",
-  userName: "wao"
+  messages: [{ text: 'Implement Redux Store', id: 1 }, 
+             { text: 'Implement Task Creation', id: 1 }, 
+             { text: 'Implement Header Colors', id: 2 }]
 };
 
 export function systemReducer(
   state = initialState,
-  action: SystemActionTypes
+  action: SystemMessageType
 ): SystemState {
   switch (action.type) {
-    case UPDATE_SESSION: {
+    case PUSH_MESSAGE: {
       return {
-        ...state,
-        ...action.payload
+        messages: [...state.messages, action.payload]
       };
     }
     default:
