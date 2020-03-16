@@ -1,9 +1,9 @@
-import { PUSH_MESSAGE, SystemState, SystemMessageType } from "./types";
+import { PUSH_TODO_MESSAGE, SystemState, SystemMessageType, Message } from "./types";
 
 const initialState: SystemState = {
-  messages: [{ text: 'Implement Redux Store', id: 1 }, 
-             { text: 'Implement Task Creation', id: 1 }, 
-             { text: 'Implement Header Colors', id: 2 }]
+  todo_messages: [],
+  in_dev_messages: [{text: 'Implement Task Creation'} as Message, {text: 'Implement Redux Store'} as Message],
+  done_messages: [{text: 'Implement Header Colors'} as Message]
 };
 
 export function systemReducer(
@@ -11,9 +11,10 @@ export function systemReducer(
   action: SystemMessageType
 ): SystemState {
   switch (action.type) {
-    case PUSH_MESSAGE: {
+    case PUSH_TODO_MESSAGE: {
       return {
-        messages: [...state.messages, action.payload]
+        ...state, 
+        todo_messages: [...state.todo_messages, action.payload]
       };
     }
     default:

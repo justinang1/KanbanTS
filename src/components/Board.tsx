@@ -4,24 +4,25 @@ import { TypedUseSelectorHook, useSelector, useDispatch } from 'react-redux';
 import '../style/Board.css';
 
 import Column from './Column';
+import { SystemState } from '../store/system/types';
 
-import { sendMessage } from '../store/system/actions';
+import { sendTODOMessage } from '../store/system/actions';
 
 interface System {
-  system: { };
+  system: SystemState;
 };
 
 const typedUseSelector: TypedUseSelectorHook<System> = useSelector;
 
 function Board() {
-  const system = typedUseSelector(state => state.system);
-  const dispatch = useDispatch()
+  // const system = typedUseSelector(state => state.system);
+  // const dispatch = useDispatch()
   // useEffect(() => {
   //   dispatch(sendMessage({text: 'Implement Redux Store', id: 1}));
   //   dispatch(sendMessage({text: 'Implement Task Creation', id: 1}));
   //   dispatch(sendMessage({text: 'Implement Header Colors', id: 2}));
   // }, [dispatch]);
-  console.log(system);
+  // console.log(system);
   return (  
     <div className="main-board">
       <div className="col-container">

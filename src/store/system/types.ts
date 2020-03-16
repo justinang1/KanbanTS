@@ -1,26 +1,19 @@
 // Describing the shape of the system's slice of state
 export interface SystemState {
-  messages: {text: string, id: number}[];
+  todo_messages: Message[];
+  in_dev_messages: Message[];
+  done_messages: Message[];
 }
 
 export interface Message {
   text: string;
-  id: number;
 }
 
 // Describing the different ACTION NAMES available
-export const UPDATE_SESSION = 'UPDATE_SESSION';
-export const PUSH_MESSAGE = 'PUSH_MESSAGE';
-
-interface UpdateSessionAction {
-  type: typeof UPDATE_SESSION;
-  payload: SystemState;
-}
+export const PUSH_TODO_MESSAGE = 'PUSH_TODO_MESSAGE';
 
 interface PushMessageAction {
-  type: typeof PUSH_MESSAGE;
+  type: typeof PUSH_TODO_MESSAGE;
   payload: Message;
 }
-
-export type SystemActionTypes = UpdateSessionAction;
 export type SystemMessageType = PushMessageAction;
