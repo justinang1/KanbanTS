@@ -1,4 +1,5 @@
-import { PUSH_TODO_MESSAGE, SystemState, SystemMessageType, Message } from "./types";
+import { PUSH_TODO_MESSAGE, PUSH_INDEV_MESSAGE, PUSH_DONE_MESSAGE } from './types'
+import { SystemState, GenericPushType, Message } from "./types";
 
 const initialState: SystemState = {
   todo_messages: [],
@@ -8,13 +9,25 @@ const initialState: SystemState = {
 
 export function systemReducer(
   state = initialState,
-  action: SystemMessageType
+  action: GenericPushType
 ): SystemState {
   switch (action.type) {
     case PUSH_TODO_MESSAGE: {
       return {
         ...state, 
-        todo_messages: [...state.todo_messages, action.payload]
+        todo_messages: [action.payload, ...state.todo_messages]
+      };
+    }
+    case PUSH_INDEV_MESSAGE: {
+      return {
+        ...state, 
+        in_dev_messages: [action.payload, ...state.in_dev_messages]
+      };
+    }
+    case PUSH_DONE_MESSAGE: {
+      return {
+        ...state, 
+        done_messages: [action.payload, ...state.done_messages]
       };
     }
     default:

@@ -11,9 +11,22 @@ export interface Message {
 
 // Describing the different ACTION NAMES available
 export const PUSH_TODO_MESSAGE = 'PUSH_TODO_MESSAGE';
+export const PUSH_INDEV_MESSAGE = 'PUSH_INDEV_MESSAGE';
+export const PUSH_DONE_MESSAGE = 'PUSH_DONE_MESSAGE';
 
-interface PushMessageAction {
+interface PushTodoMessage {
   type: typeof PUSH_TODO_MESSAGE;
   payload: Message;
 }
-export type SystemMessageType = PushMessageAction;
+
+interface PushInDevMessage {
+  type: typeof PUSH_INDEV_MESSAGE;
+  payload: Message;
+}
+
+interface PushDoneMessage {
+  type: typeof PUSH_DONE_MESSAGE;
+  payload: Message;
+}
+
+export type GenericPushType = PushTodoMessage | PushInDevMessage | PushDoneMessage;

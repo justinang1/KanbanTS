@@ -1,7 +1,10 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 
 import '../style/Board.css';
 
+import { createTODOMessage, createInDevMessage, createDoneMessage } from '../store/system/actions';
+import { Message } from '../store/system/types';
 
 type ColProps = {
   text: string,
@@ -10,6 +13,9 @@ type ColProps = {
 }
 
 function Task({text, type, id} : ColProps) {
+  let actions : {(text: Message) : void}[] = [createTODOMessage, createInDevMessage, createDoneMessage];
+  const dispatch = useDispatch();
+
   return (  
     <div className='task-row'>
       <span className='left-angle'>
@@ -20,7 +26,7 @@ function Task({text, type, id} : ColProps) {
       <span className={type < 0 ? 'create-text' : 'task-text'} onClick={(e) => {
         if (type < 0) {
           var inputText = prompt();
-          alert(inputText);
+          dispatch(actions[id]({text: inputText} as Message));
         }
       }}>
         {text}

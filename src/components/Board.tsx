@@ -5,8 +5,7 @@ import '../style/Board.css';
 
 import Column from './Column';
 import { SystemState } from '../store/system/types';
-
-import { sendTODOMessage } from '../store/system/actions';
+import { createTODOMessage } from '../store/system/actions';
 
 interface System {
   system: SystemState;
@@ -15,14 +14,14 @@ interface System {
 const typedUseSelector: TypedUseSelectorHook<System> = useSelector;
 
 function Board() {
-  // const system = typedUseSelector(state => state.system);
-  // const dispatch = useDispatch()
-  // useEffect(() => {
-  //   dispatch(sendMessage({text: 'Implement Redux Store', id: 1}));
-  //   dispatch(sendMessage({text: 'Implement Task Creation', id: 1}));
-  //   dispatch(sendMessage({text: 'Implement Header Colors', id: 2}));
-  // }, [dispatch]);
-  // console.log(system);
+  const system = typedUseSelector(state => state.system);
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(createTODOMessage({text: 'Implement Tagging'}));
+    dispatch(createTODOMessage({text: 'Implement DB and GraphQL'}));
+    dispatch(createTODOMessage({text: 'Final Touches'}));
+  }, [dispatch]);
+  console.log(system);
   return (  
     <div className="main-board">
       <div className="col-container">
