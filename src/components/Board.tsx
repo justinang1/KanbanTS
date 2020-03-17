@@ -17,6 +17,7 @@ function Board() {
   const system = typedUseSelector(state => state.system);
   const dispatch = useDispatch()
   useEffect(() => {
+    dispatch(createTODOMessage({text: 'Saving Board State'}));
     dispatch(createTODOMessage({text: 'Implement Tagging'}));
     dispatch(createTODOMessage({text: 'Implement DB and GraphQL'}));
     dispatch(createTODOMessage({text: 'Final Touches'}));

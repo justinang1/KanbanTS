@@ -22,10 +22,10 @@ function Column({name, id} : ColProps) {
   /* Variable Declarations */
   const system = typedUseSelector(state => state.system);
   let headerColor: string = "";
-  let childElem: Array<Object> = [<Task text='+ Click to Add Task' id={id} type={-1} key={-1}/>];
+  let childElem: Array<Object> = [<Task text='+ Click to Add Task' id={id} type={-1} idx={-1} key={-1} />];
   let renderList: Message[] = [];
 
-  console.log(id)
+  // console.log(id)
   switch(id) {
     case 0:
       headerColor = 'header-red';
@@ -44,8 +44,8 @@ function Column({name, id} : ColProps) {
   }
 
   renderList.forEach((msg, idx) => {
-    console.log(msg, idx);
-    childElem.unshift(<Task text={msg.text} id={id} type={0} key={idx}/>);
+    // console.log(msg, idx);
+    childElem.unshift(<Task text={msg.text} id={id} type={0} key={idx} idx={idx}/>);
   })
   // console.log(renderList)
   return (
