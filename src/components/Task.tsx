@@ -19,7 +19,6 @@ function Task({text, type, id, idx} : ColProps) {
   let advActions: {(id: MessageExtract) : void}[] = [advanceTodoMessage, advanceInDevMessage];
   let prevActions: {(id: MessageExtract) : void}[] = [previousInDevMessage, previousDoneMessage];
   const dispatch = useDispatch();
-  console.log(idx);
 
   return (  
     <div className='task-row'>
@@ -33,10 +32,15 @@ function Task({text, type, id, idx} : ColProps) {
       <span className={type < 0 ? 'create-text' : 'task-text'} onClick={(e) => {
         if (type < 0) {
           var inputText = prompt();
-          dispatch(pushActions[id]({text: inputText} as Message));
+          if (inputText) {
+            dispatch(pushActions[id]({text: inputText} as Message));
+          }
         }
       }}>
-        {text}
+        <div className="task-descriptor">
+          <span>{text}</span>
+          {type < 0 ? undefined : <span className="task-tags">+ Tags</span>}
+        </div>
       </span>
       <span className='right-angle'>
       {(id < 2 && type > -1) ? 

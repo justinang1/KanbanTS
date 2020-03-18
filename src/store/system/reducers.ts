@@ -3,9 +3,9 @@ import { ADV_TODO_MESSAGE, ADV_INDEV_MESSAGE, PREV_DONE_MESSAGE, PREV_INDEV_MESS
 import { SystemState, GenericPushType, GenericShiftType, Message } from "./types";
 
 const initialState: SystemState = {
-  todo_messages: [],
-  in_dev_messages: [{text: 'Implement Task Creation'} as Message, {text: 'Implement Redux Store'} as Message],
-  done_messages: [{text: 'Implement Header Colors'} as Message]
+  todo_messages: [{text: 'Implement DB and GraphQL'} as Message, {text: 'Final Touches'} as Message],
+  in_dev_messages: [{text: 'Saving Board State'} as Message, {text: 'Implement Tagging'} as Message],
+  done_messages: [{text: 'Implement Header Colors'} as Message, {text: 'Implement Task Creation'} as Message, {text: 'Implement Redux Store'} as Message]
 };
 
 export function systemReducer(

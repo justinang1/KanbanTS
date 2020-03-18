@@ -76,3 +76,15 @@
 .task-text {
   cursor: default;
 }
+
+.task-descriptor {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.task-tags {
+  margin-top: 0.4rem;
+  color: #D3D3D3;
+  cursor: pointer;
+}
