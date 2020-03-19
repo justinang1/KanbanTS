@@ -1,0 +1,69 @@
+.tag-header {
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+
+.tag-selection {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.tag-controls {
+  font-size: 1rem;
+  font-weight: 450;
+  padding: 0.2rem 0.6rem 0.2rem 0.6rem;
+  background-color: white;
+  border-color: grey;
+  color: grey;
+}
+
+.tag-controls:hover {
+  background-color: white;
+  color: grey;
+  border-color: grey;
+}
+
+.tag {
+  font-weight: 700;
+  padding: 4px 8px;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 3px;
+  display: inline;
+  margin-right: .4rem;
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.tag-primary {
+  background-color: #007bff;
+  color: white;
+}
+
+.tag-secondary {
+  background-color: #6c757d;
+  color: white;
+}
+
+.tag-urgent {
+  background-color: #dc3545;
+  color: white;
+}
+
+.tag-warning {
+  background-color: #ffc107;
+}
+
+.tag-technical {
+  background-color: #17a2b8;
+}
+
+.tag-devops {
+  background-color: #28a745;
+  color: white;
+}
+
+.tag-coding {
+  background-color: #343a40;
+  color: white;
+}

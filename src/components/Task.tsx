@@ -1,26 +1,39 @@
-import React from 'react';
+import React, { useState, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
 import '../style/Board.css';
+
+import Tag from './Tag';
 
 import { createTODOMessage, createInDevMessage, createDoneMessage } from '../store/system/actions';
 import { advanceTodoMessage, advanceInDevMessage, previousDoneMessage, previousInDevMessage } from '../store/system/actions';
 import { Message, MessageExtract } from '../store/system/types';
 
-type ColProps = {
+type TaskProps = {
   text: string,
   type: number,
   id: number,
   idx: number
 }
 
-function Task({text, type, id, idx} : ColProps) {
+function Task({text, type, id, idx} : TaskProps) {
+  const [showTag, setShowTag] = useState(false);
+  const memoizedHandleClick = useCallback(
+    () => {
+      console.log("Fired");
+      setShowTag(!showTag);
+    },
+    [showTag],
+  );
+
   let pushActions : {(text: Message) : void}[] = [createTODOMessage, createInDevMessage, createDoneMessage];
   let advActions: {(id: MessageExtract) : void}[] = [advanceTodoMessage, advanceInDevMessage];
   let prevActions: {(id: MessageExtract) : void}[] = [previousInDevMessage, previousDoneMessage];
   const dispatch = useDispatch();
 
   return (  
+    <div>
+    {showTag ? <Tag func={memoizedHandleClick}/> : undefined}
     <div className='task-row'>
       <span className='left-angle'>
       {(id > 0 && type > -1) ? 
@@ -29,7 +42,7 @@ function Task({text, type, id, idx} : ColProps) {
         &#x2039;
       </span> : undefined}
       </span>
-      <span className={type < 0 ? 'create-text' : 'task-text'} onClick={(e) => {
+      <span className={type < 0 ? 'create-text' : 'task-text'} onClick={(_e) => {
         if (type < 0) {
           var inputText = prompt();
           if (inputText) {
@@ -39,7 +52,14 @@ function Task({text, type, id, idx} : ColProps) {
       }}>
         <div className="task-descriptor">
           <span>{text}</span>
-          {type < 0 ? undefined : <span className="task-tags">+ Tags</span>}
+          {type < 0 ? undefined : 
+          <span className="task-tags"
+          onClick={(_e) => {
+            setShowTag(!showTag)
+          }}>
+            + Tags
+          </span>
+          }
         </div>
       </span>
       <span className='right-angle'>
@@ -49,6 +69,7 @@ function Task({text, type, id, idx} : ColProps) {
         &#8250;
       </span> : undefined}
       </span>
+    </div>
     </div>
   );
 }
