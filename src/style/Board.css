@@ -88,3 +88,7 @@
   color: #D3D3D3;
   cursor: pointer;
 }
+
+.modal-backdrop.show {
+  opacity: 0.1 !important;
+}

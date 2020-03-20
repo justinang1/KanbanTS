@@ -1,7 +1,8 @@
 import { Message, MessageExtract } from './types';
 import { PUSH_TODO_MESSAGE, PUSH_INDEV_MESSAGE, PUSH_DONE_MESSAGE } from './types';
 import { ADV_TODO_MESSAGE, ADV_INDEV_MESSAGE, PREV_DONE_MESSAGE, PREV_INDEV_MESSAGE } from './types';
-import { GenericPushType, GenericShiftType } from './types';
+import { SHOW_TAG_SELECTOR, HIDE_TAG_SELECTOR } from './types';
+import { GenericPushType, GenericShiftType, GenericTagType } from './types';
 
 // TypeScript infers that this function is returning SendMessageAction
 export function createTODOMessage(newMessage: Message): GenericPushType {
@@ -50,5 +51,19 @@ export function previousInDevMessage(MessageID: MessageExtract): GenericShiftTyp
   return {
     type: PREV_INDEV_MESSAGE,
     payload: MessageID
+  }
+}
+
+export function showTagSelector(): GenericTagType {
+  return {
+    type: SHOW_TAG_SELECTOR,
+    payload: true
+  }
+}
+
+export function hideTagSelector(): GenericTagType {
+  return {
+    type: HIDE_TAG_SELECTOR,
+    payload: false
   }
 }

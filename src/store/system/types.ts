@@ -3,6 +3,8 @@ export interface SystemState {
   todo_messages: Message[];
   in_dev_messages: Message[];
   done_messages: Message[];
+  show_tag: boolean;
+  tag_edit_id: number | undefined;
 }
 
 export interface Message {
@@ -23,6 +25,9 @@ export const ADV_INDEV_MESSAGE = 'ADV_INDEV_MESSAGE';
 
 export const PREV_DONE_MESSAGE = 'PREV_DONE_MESSAGE';
 export const PREV_INDEV_MESSAGE = 'PREV_INDEV_MESSAGE';
+
+export const SHOW_TAG_SELECTOR = 'SHOW_TAG_SELECTOR';
+export const HIDE_TAG_SELECTOR = 'HIDE_TAG_SELECTOR';
 
 interface PushTodoMessage {
   type: typeof PUSH_TODO_MESSAGE;
@@ -64,6 +69,18 @@ interface PrevInDevMessage {
   payload: MessageExtract;
 }
 
+interface ShowTagSelector {
+  type: typeof SHOW_TAG_SELECTOR;
+  payload: boolean;
+}
+
+interface HideTagSelector {
+  type: typeof HIDE_TAG_SELECTOR;
+  payload: boolean;
+}
+
 export type GenericPushType = PushTodoMessage | PushInDevMessage | PushDoneMessage;
 
 export type GenericShiftType = AdvTodoMessage | AdvInDevMessage | PrevDoneMessage | PrevInDevMessage;
+
+export type GenericTagType = ShowTagSelector | HideTagSelector;

@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
 
 import '../style/Board.css';
@@ -7,6 +7,7 @@ import Tag from './Tag';
 
 import { createTODOMessage, createInDevMessage, createDoneMessage } from '../store/system/actions';
 import { advanceTodoMessage, advanceInDevMessage, previousDoneMessage, previousInDevMessage } from '../store/system/actions';
+import { showTagSelector } from '../store/system/actions';
 import { Message, MessageExtract } from '../store/system/types';
 
 type TaskProps = {
@@ -17,14 +18,6 @@ type TaskProps = {
 }
 
 function Task({text, type, id, idx} : TaskProps) {
-  const [showTag, setShowTag] = useState(false);
-  const memoizedHandleClick = useCallback(
-    () => {
-      console.log("Fired");
-      setShowTag(!showTag);
-    },
-    [showTag],
-  );
 
   let pushActions : {(text: Message) : void}[] = [createTODOMessage, createInDevMessage, createDoneMessage];
   let advActions: {(id: MessageExtract) : void}[] = [advanceTodoMessage, advanceInDevMessage];
@@ -33,7 +26,6 @@ function Task({text, type, id, idx} : TaskProps) {
 
   return (  
     <div>
-    {showTag ? <Tag func={memoizedHandleClick}/> : undefined}
     <div className='task-row'>
       <span className='left-angle'>
       {(id > 0 && type > -1) ? 
@@ -55,7 +47,8 @@ function Task({text, type, id, idx} : TaskProps) {
           {type < 0 ? undefined : 
           <span className="task-tags"
           onClick={(_e) => {
-            setShowTag(!showTag)
+            dispatch(showTagSelector());
+            // setShowTag(!showTag)
           }}>
             + Tags
           </span>
@@ -70,6 +63,7 @@ function Task({text, type, id, idx} : TaskProps) {
       </span> : undefined}
       </span>
     </div>
+    <Tag />
     </div>
   );
 }

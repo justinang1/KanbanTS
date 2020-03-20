@@ -1,21 +1,29 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Modal, Button } from 'react-bootstrap';
+import { TypedUseSelectorHook, useSelector, useDispatch } from 'react-redux';
+import { hideTagSelector } from '../store/system/actions';
+
+import { SystemState } from '../store/system/types';
 
 import '../style/Tag.css';
 
-type TagProps = {
-  func: {(visible: string) : void}
-}
+interface System {
+  system: SystemState
+};
 
-function Tag({ func } : TagProps) {
-  const [show, setShow] = useState(true);
+const typedUseSelector: TypedUseSelectorHook<System> = useSelector;
 
-  const handleClose = () => setShow(false);
+function Tag() {
 
-  console.log(show);
+  const system = typedUseSelector(state => state.system);
+  const dispatch = useDispatch();
+
+  console.log(system);
+
+  const handleClose = () => dispatch(hideTagSelector());
 
   return (  
-    <Modal show={show} onHide={handleClose}>
+    <Modal show={system.show_tag} onHide={handleClose}>
       <Modal.Header closeButton>
           <Modal.Title className="tag-header">Add Tags</Modal.Title>
         </Modal.Header>
