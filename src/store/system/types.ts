@@ -9,6 +9,7 @@ export interface SystemState {
 
 export interface Message {
   text: string;
+  tags: number[];
 }
 
 export interface MessageExtract {
