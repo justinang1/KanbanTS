@@ -5,6 +5,7 @@ export interface SystemState {
   done_messages: Message[];
   show_tag: boolean;
   tag_edit_id: number | undefined;
+  tag_edit_col: number | undefined;
 }
 
 export interface Message {
@@ -14,6 +15,17 @@ export interface Message {
 
 export interface MessageExtract {
   id: number;
+}
+
+export interface TagID {
+  id: number;
+  idx: number;
+}
+
+export interface TagMutator {
+  id: number | undefined;
+  idx: number | undefined;
+  tags: number[];
 }
 
 // Describing the different ACTION NAMES available
@@ -29,6 +41,7 @@ export const PREV_INDEV_MESSAGE = 'PREV_INDEV_MESSAGE';
 
 export const SHOW_TAG_SELECTOR = 'SHOW_TAG_SELECTOR';
 export const HIDE_TAG_SELECTOR = 'HIDE_TAG_SELECTOR';
+export const ADD_TAGS = 'ADD_TAGS';
 
 interface PushTodoMessage {
   type: typeof PUSH_TODO_MESSAGE;
@@ -72,12 +85,17 @@ interface PrevInDevMessage {
 
 interface ShowTagSelector {
   type: typeof SHOW_TAG_SELECTOR;
-  payload: boolean;
+  payload: TagID;
 }
 
 interface HideTagSelector {
   type: typeof HIDE_TAG_SELECTOR;
-  payload: boolean;
+  payload: TagID;
+}
+
+interface AddTags {
+  type: typeof ADD_TAGS;
+  payload: TagMutator;
 }
 
 export type GenericPushType = PushTodoMessage | PushInDevMessage | PushDoneMessage;
@@ -85,3 +103,5 @@ export type GenericPushType = PushTodoMessage | PushInDevMessage | PushDoneMessa
 export type GenericShiftType = AdvTodoMessage | AdvInDevMessage | PrevDoneMessage | PrevInDevMessage;
 
 export type GenericTagType = ShowTagSelector | HideTagSelector;
+
+export type ModifyTagType = AddTags;

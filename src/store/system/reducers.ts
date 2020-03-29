@@ -1,19 +1,21 @@
 import { PUSH_TODO_MESSAGE, PUSH_INDEV_MESSAGE, PUSH_DONE_MESSAGE } from './types'
 import { ADV_TODO_MESSAGE, ADV_INDEV_MESSAGE, PREV_DONE_MESSAGE, PREV_INDEV_MESSAGE } from './types';
-import { SHOW_TAG_SELECTOR, HIDE_TAG_SELECTOR } from './types';
-import { SystemState, GenericPushType, GenericShiftType, GenericTagType, Message } from "./types";
+import { SHOW_TAG_SELECTOR, HIDE_TAG_SELECTOR, ADD_TAGS } from './types';
+import { SystemState, GenericPushType, GenericShiftType, GenericTagType, ModifyTagType, Message } from "./types";
 
 const initialState: SystemState = {
   todo_messages: [{text: 'Implement DB and GraphQL'} as Message, {text: 'Final Touches'} as Message],
   in_dev_messages: [{text: 'Saving Board State'} as Message, {text: 'Implement Tagging'} as Message],
-  done_messages: [{text: 'Implement Header Colors'} as Message, {text: 'Implement Task Creation'} as Message, {text: 'Implement Redux Store'} as Message],
+  done_messages: [{text: 'Implement Header Colors'} as Message, 
+  {text: 'Implement Task Creation'} as Message, {text: 'Implement Redux Store'} as Message],
   show_tag: false,
-  tag_edit_id: undefined
+  tag_edit_id: undefined,
+  tag_edit_col: undefined
 };
 
 export function systemReducer(
   state = initialState,
-  action: GenericPushType | GenericShiftType | GenericTagType
+  action: GenericPushType | GenericShiftType | GenericTagType | ModifyTagType
 ): SystemState {
   switch (action.type) {
     // Message Creation Handlers
@@ -73,15 +75,49 @@ export function systemReducer(
       }
     }
     case SHOW_TAG_SELECTOR: {
+      // console.log(action.payload);
       return {
         ...state,
-        show_tag: action.payload
+        tag_edit_col: action.payload.id,
+        tag_edit_id: action.payload.idx,
+        show_tag: true
       }
     }
     case HIDE_TAG_SELECTOR: {
       return {
         ...state,
-        show_tag: action.payload
+        tag_edit_col: undefined,
+        tag_edit_id: undefined,
+        show_tag: false
+      }
+    }
+    case ADD_TAGS: {
+      // console.log(action.payload)
+      switch(action.payload.id) {
+        case 0:
+          return {
+            ...state,
+            todo_messages: state.todo_messages.map((item, idx) => {
+              return (idx === action.payload.idx) ? {...item, tags: action.payload.tags} : item
+            })
+          }
+        case 1:
+          return {
+            ...state,
+            in_dev_messages: state.in_dev_messages.map((item, idx) => {
+              return (idx === action.payload.idx) ? {...item, tags: action.payload.tags} : item
+            })
+          }
+        case 2:
+          return {
+            ...state,
+            done_messages: state.done_messages.map((item, idx) => {
+              return (idx === action.payload.idx) ? {...item, tags: action.payload.tags} : item
+            })
+          }
+      }
+      return {
+        ...state,
       }
     }
     default:

@@ -2,27 +2,39 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 
 import '../style/Board.css';
+import '../style/Tag.css';
 
 import Tag from './Tag';
 
 import { createTODOMessage, createInDevMessage, createDoneMessage } from '../store/system/actions';
 import { advanceTodoMessage, advanceInDevMessage, previousDoneMessage, previousInDevMessage } from '../store/system/actions';
 import { showTagSelector } from '../store/system/actions';
-import { Message, MessageExtract } from '../store/system/types';
+import { Message, MessageExtract, TagID } from '../store/system/types';
 
 type TaskProps = {
   text: string,
   type: number,
   id: number,
-  idx: number
+  idx: number,
+  tags: number[]
 }
 
-function Task({text, type, id, idx} : TaskProps) {
+interface tagDisplay {
+  text: string,
+  class: string
+}
+
+function Task({text, type, id, idx, tags} : TaskProps) {
 
   let pushActions : {(text: Message) : void}[] = [createTODOMessage, createInDevMessage, createDoneMessage];
   let advActions: {(id: MessageExtract) : void}[] = [advanceTodoMessage, advanceInDevMessage];
   let prevActions: {(id: MessageExtract) : void}[] = [previousInDevMessage, previousDoneMessage];
+  const tagInfo: tagDisplay[] = [{text: 'Primary', class: 'tag tag-primary '}, {text: 'Secondary', class: 'tag tag-secondary '}, 
+  {text: 'Urgent', class: 'tag tag-urgent '}, {text: 'Warning', class: 'tag tag-warning '}, {text: 'Technical', class: 'tag tag-technical '}, 
+  {text: 'DevOps', class: 'tag tag-devops '}, {text: 'Coding', class: 'tag tag-coding '}]
   const dispatch = useDispatch();
+
+  console.log(tags)
 
   return (  
     <div>
@@ -47,10 +59,12 @@ function Task({text, type, id, idx} : TaskProps) {
           {type < 0 ? undefined : 
           <span className="task-tags"
           onClick={(_e) => {
-            dispatch(showTagSelector());
-            // setShowTag(!showTag)
+            dispatch(showTagSelector({id, idx} as TagID));
           }}>
-            + Tags
+            {(tags) ?  tags.map((item, idx) => {
+              console.log(item)
+            return (<div key={idx} className={tagInfo[item].class + "active"}>{tagInfo[item].text}</div>)
+            }) : "+ Tags"}
           </span>
           }
         </div>

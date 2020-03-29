@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import { TypedUseSelectorHook, useSelector, useDispatch } from 'react-redux';
-import { hideTagSelector } from '../store/system/actions';
+import { hideTagSelector, addTags } from '../store/system/actions';
+import { TagID, TagMutator } from '../store/system/types';
 
 import { SystemState } from '../store/system/types';
 
@@ -19,10 +20,25 @@ function Tag() {
   const dispatch = useDispatch();
   const [activeTags, setActiveTags] = useState([false, false, false, false, false, false, false]);
 
+  // console.log(system)
+
   const handleClose = () => {
-    dispatch(hideTagSelector());
+    dispatch(hideTagSelector({} as TagID));
     setActiveTags([false, false, false, false, false, false, false]);
   };
+
+  const handleSave = () => {
+    let newTags: number[] = [];
+    activeTags.forEach((item, idx) => {
+      if(item) {
+        newTags.push(idx)
+      }
+    })
+    let inputMutator: TagMutator = {id: system.tag_edit_col, idx: system.tag_edit_id, tags: newTags};
+    dispatch(addTags(inputMutator));
+    handleClose();
+    // console.log(newTags)
+  }
 
   return (  
     <Modal show={system.show_tag} onHide={handleClose}>
@@ -70,7 +86,7 @@ function Tag() {
           <Button variant="secondary" onClick={handleClose} className="tag-controls">
             Cancel
           </Button>
-          <Button variant="secondary" onClick={handleClose} className="tag-controls">
+          <Button variant="secondary" onClick={handleSave} className="tag-controls">
             Save Changes
           </Button>
         </Modal.Footer>
