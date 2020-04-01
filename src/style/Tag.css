@@ -5,7 +5,9 @@
 
 .tag-selection {
   padding-top: 2rem;
-  padding-bottom: 2rem;
+  padding-bottom: 1rem;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .tag-controls {
@@ -24,12 +26,13 @@
 }
 
 .tag {
+  margin-bottom: 1rem;
   font-weight: 700;
   padding: 4px 8px;
   font-size: 12px;
   font-weight: 600;
   border-radius: 3px;
-  display: inline;
+  display: inline-block;
   margin-right: .4rem;
   cursor: pointer;
   opacity: 0.6;

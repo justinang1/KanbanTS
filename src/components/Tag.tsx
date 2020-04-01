@@ -20,8 +20,6 @@ function Tag() {
   const dispatch = useDispatch();
   const [activeTags, setActiveTags] = useState([false, false, false, false, false, false, false]);
 
-  // console.log(system)
-
   const handleClose = () => {
     dispatch(hideTagSelector({} as TagID));
     setActiveTags([false, false, false, false, false, false, false]);
@@ -37,7 +35,6 @@ function Tag() {
     let inputMutator: TagMutator = {id: system.tag_edit_col, idx: system.tag_edit_id, tags: newTags};
     dispatch(addTags(inputMutator));
     handleClose();
-    // console.log(newTags)
   }
 
   return (  
@@ -49,22 +46,22 @@ function Tag() {
           <div className={"tag tag-primary " + ((activeTags[0]) ? "active" : "")} onClick={(_e) => {
             setActiveTags([!activeTags[0], ...activeTags.slice(1)])
           }}>
-            Primary
+            Critical
           </div>
           <div className={"tag tag-secondary " + ((activeTags[1]) ? "active" : "")} onClick={(_e) => {
             setActiveTags([...activeTags.slice(0, 1), !activeTags[1], ...activeTags.slice(2)])
           }}>
-            Secondary
+            Enhancement
           </div>
           <div className={"tag tag-urgent " + ((activeTags[2]) ? "active" : "")} onClick={(_e) => {
             setActiveTags([...activeTags.slice(0, 2), !activeTags[2], ...activeTags.slice(3)])
           }}>
-            Urgent
+            Challenging
           </div>
           <div className={"tag tag-warning " + ((activeTags[3]) ? "active" : "")} onClick={(_e) => {
             setActiveTags([...activeTags.slice(0, 3), !activeTags[3], ...activeTags.slice(4)])
           }}>
-            Warning
+            Hard
           </div>
           <div className={"tag tag-technical " + ((activeTags[4]) ? "active" : "")} onClick={(_e) => {
             setActiveTags([...activeTags.slice(0, 4), !activeTags[4], ...activeTags.slice(5)])

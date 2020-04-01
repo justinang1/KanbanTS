@@ -4,11 +4,11 @@ import { SHOW_TAG_SELECTOR, HIDE_TAG_SELECTOR, ADD_TAGS } from './types';
 import { SystemState, GenericPushType, GenericShiftType, GenericTagType, ModifyTagType, Message } from "./types";
 
 const initialState: SystemState = {
-  todo_messages: [{text: 'Implement DB and GraphQL'} as Message, {text: 'Final Touches'} as Message],
+  todo_messages: [{text: 'Implement DB and GraphQL', tags: [0, 2, 4, 5]} as Message, {text: 'Final Touches', tags: [1]} as Message],
   in_dev_messages: [],
-  done_messages: [{text: 'Implement Header Colors'} as Message, 
-  {text: 'Saving Board State'} as Message, {text: 'Implement Tagging'} as Message, 
-  {text: 'Implement Task Creation'} as Message, {text: 'Implement Redux Store'} as Message],
+  done_messages: [{text: 'Implement Header Colors', tags: [1, 6]} as Message, 
+  {text: 'Saving Board State', tags: [1, 4, 6]} as Message, {text: 'Implement Tagging', tags: [1, 2, 4, 6]} as Message, 
+  {text: 'Implement Task Creation', tags: [1, 6]} as Message, {text: 'Implement Redux Store', tags: [0, 2, 4, 6]} as Message],
   show_tag: false,
   tag_edit_id: undefined,
   tag_edit_col: undefined

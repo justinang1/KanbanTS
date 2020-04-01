@@ -29,12 +29,10 @@ function Task({text, type, id, idx, tags} : TaskProps) {
   let pushActions : {(text: Message) : void}[] = [createTODOMessage, createInDevMessage, createDoneMessage];
   let advActions: {(id: MessageExtract) : void}[] = [advanceTodoMessage, advanceInDevMessage];
   let prevActions: {(id: MessageExtract) : void}[] = [previousInDevMessage, previousDoneMessage];
-  const tagInfo: tagDisplay[] = [{text: 'Primary', class: 'tag tag-primary '}, {text: 'Secondary', class: 'tag tag-secondary '}, 
-  {text: 'Urgent', class: 'tag tag-urgent '}, {text: 'Warning', class: 'tag tag-warning '}, {text: 'Technical', class: 'tag tag-technical '}, 
+  const tagInfo: tagDisplay[] = [{text: 'Critical', class: 'tag tag-primary '}, {text: 'Enhancement', class: 'tag tag-secondary '}, 
+  {text: 'Challenging', class: 'tag tag-urgent '}, {text: 'Hard', class: 'tag tag-warning '}, {text: 'Technical', class: 'tag tag-technical '}, 
   {text: 'DevOps', class: 'tag tag-devops '}, {text: 'Coding', class: 'tag tag-coding '}]
   const dispatch = useDispatch();
-
-  console.log(tags)
 
   return (  
     <div>
@@ -62,8 +60,9 @@ function Task({text, type, id, idx, tags} : TaskProps) {
             dispatch(showTagSelector({id, idx} as TagID));
           }}>
             {(tags) ?  tags.map((item, idx) => {
-              console.log(item)
-            return (<div key={idx} className={tagInfo[item].class + "active"}>{tagInfo[item].text}</div>)
+            return (<div key={idx} className={tagInfo[item].class + "active"}>
+              {/* <span>&times;</span>  */}
+              {tagInfo[item].text}</div>)
             }) : "+ Tags"}
           </span>
           }

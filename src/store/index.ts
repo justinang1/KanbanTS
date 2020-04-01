@@ -17,9 +17,6 @@ export default function configureStore() {
 
   const persistedState = loadState();
 
-  console.log(middlewares)
-  console.log(persistedState)
-
   const store = createStore(
     rootReducer,
     {system: persistedState},
