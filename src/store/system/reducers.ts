@@ -5,8 +5,9 @@ import { SystemState, GenericPushType, GenericShiftType, GenericTagType, ModifyT
 
 const initialState: SystemState = {
   todo_messages: [{text: 'Implement DB and GraphQL'} as Message, {text: 'Final Touches'} as Message],
-  in_dev_messages: [{text: 'Saving Board State'} as Message, {text: 'Implement Tagging'} as Message],
+  in_dev_messages: [],
   done_messages: [{text: 'Implement Header Colors'} as Message, 
+  {text: 'Saving Board State'} as Message, {text: 'Implement Tagging'} as Message, 
   {text: 'Implement Task Creation'} as Message, {text: 'Implement Redux Store'} as Message],
   show_tag: false,
   tag_edit_id: undefined,
